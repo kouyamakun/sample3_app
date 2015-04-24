@@ -3,8 +3,7 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com", 
-                        password: "foobar", password_confirmation: "foobar")
+    @user = User.new(name: "Example User", email: "user@example.com",password: "foobar", password_confirmation: "foobar")
   end
 
   subject { @user }
@@ -17,7 +16,7 @@ describe User do
 
   it { should be_valid }
 
-describe "when password is not present" do
+  describe "when password is not present" do
     before do
       @user = User.new(name: "Example User", email: "user@example.com",
                        password: "", password_confirmation: "")
@@ -38,13 +37,14 @@ describe "when password is not present" do
   describe "when email is not present" do
     before { @user.email = " " }
     it { should_not be_valid }
-  
+  end
+
   describe "when name is too long" do
     before { @user.name = "a" * 51 }
     it { should_not be_valid }
   end
- end
- describe "when email format is valid" do
+
+  describe "when email format is valid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
@@ -53,9 +53,7 @@ describe "when password is not present" do
       end
     end
   end
-  before do
-    @user = User.new(name: "Example User", email: "user@example.com")
-  end
+
   describe "when email address is already taken" do
     before do
       user_with_same_email = @user.dup
